@@ -2,7 +2,7 @@
   "name": "simple-ecommerce",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://TheYoungThunder.github.io",
+  "homepage": "https://TheYoungThunder.github.io/simple-ecommerce",
   "dependencies": {
     "-": "^0.0.1",
     "@testing-library/jest-dom": "^5.16.4",

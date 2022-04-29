@@ -6,7 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/simple-ecommerce">
+    {/* I used the basename prop to fix the issue with github pages */}
     <App />
   </BrowserRouter>
 );
