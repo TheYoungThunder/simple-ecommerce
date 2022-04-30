@@ -8,6 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter basename="/simple-ecommerce">
     {/* I used the basename prop to fix the issue with github pages */}
+    {/* solution found here: https://github.com/gitname/react-gh-pages/issues/3 */}
     <App />
   </BrowserRouter>
 );

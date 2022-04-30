@@ -9,7 +9,10 @@ export default function Gallery(props) {
   return (
     <div>
       <NavBar></NavBar>
-      <ProductsList productList={props.productList}></ProductsList>
+      <ProductsList
+        productList={props.productList}
+        handleClick={props.handleClick}
+      ></ProductsList>
 
       <Link to="cart">go to cart</Link>
     </div>
