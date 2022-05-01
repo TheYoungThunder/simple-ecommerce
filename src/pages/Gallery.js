@@ -9,18 +9,15 @@ export default function Gallery(props) {
   //   console.log(props.productList);
   return (
     <div>
-      <NavBar></NavBar>
       <PaginatedItems
         productList={props.productList}
         handleClick={props.handleClick}
-        itemsPerPage={2}
+        itemsPerPage={5}
       ></PaginatedItems>
       {/* <ProductsList
         productList={props.productList}
         handleClick={props.handleClick}
       ></ProductsList> */}
-
-      <Link to="cart">go to cart</Link>
     </div>
   );
 }

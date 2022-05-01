@@ -9,6 +9,7 @@ export default function ProductsList(props) {
       <Product
         key={product.id}
         product={product}
+        isInCart={props.isInCart}
         handleClick={props.handleClick}
       ></Product>
     );

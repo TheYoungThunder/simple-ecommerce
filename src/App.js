@@ -1,9 +1,10 @@
 import Gallery from "./pages/Gallery";
 import Cart from "./pages/Cart";
 import { Route, Routes, Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import db from "./db.json";
 import { nanoid } from "nanoid";
+import NavBar from "./components/NavBar";
 
 function App() {
   const dbWithId = db.products.map((product) => {
@@ -11,10 +12,14 @@ function App() {
   });
   const [productList, setProductList] = useState(dbWithId);
   const [cartList, setCartList] = useState([]);
+  const [noOfCartItems, setNoOfCartItems] = useState(cartList.length);
+
+  useEffect(() => {
+    setNoOfCartItems(cartList.length);
+  }, [cartList]);
 
   function handleClick(e, key) {
     e.stopPropagation();
-    // console.log(e);
     const className = e.target.className;
     if (className === "featured-image") {
       console.log(key);
@@ -27,12 +32,19 @@ function App() {
         });
         return [...prevCart, product];
       });
+    } else if (className === "remove-from-cart-button") {
+      setCartList((prevCart) => {
+        const removeButtonProducts = cartList.filter((product) => {
+          return product.id !== key;
+        });
+        return removeButtonProducts;
+      });
     }
-    // console.log(key);
   }
 
   return (
     <div className="App">
+      <NavBar noOfCartItems={noOfCartItems}></NavBar>
       <Routes>
         <Route
           path="/"
@@ -48,7 +60,13 @@ function App() {
         />
         <Route
           path="cart"
-          element={<Cart cartList={cartList} setCartList={setCartList} />}
+          element={
+            <Cart
+              cartList={cartList}
+              setCartList={setCartList}
+              handleClick={handleClick}
+            />
+          }
         />
       </Routes>
     </div>

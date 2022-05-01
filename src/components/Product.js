@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Product({ product, handleClick }) {
+export default function Product({ product, handleClick, isInCart }) {
   return (
     <div
       className="product-container"
@@ -19,6 +19,15 @@ export default function Product({ product, handleClick }) {
         {" "}
         +{" "}
       </button>
+      {isInCart && (
+        <button
+          className="remove-from-cart-button"
+          onClick={(e) => handleClick(e, product.id)}
+        >
+          {" "}
+          -{" "}
+        </button>
+      )}
       {/* <p className="product-description">{product.description}</p> */}
     </div>
   );

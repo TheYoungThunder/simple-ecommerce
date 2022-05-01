@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ProductsList from "../components/ProductsList";
 
-export default function Cart() {
+export default function Cart(props) {
   return (
     <div>
-      Cart
-      <Link to="/">GO to the gallery</Link>
+      <ProductsList
+        isInCart={true}
+        currentItems={props.cartList}
+        handleClick={props.handleClick}
+      ></ProductsList>
     </div>
   );
 }
