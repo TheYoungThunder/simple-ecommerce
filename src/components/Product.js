@@ -4,7 +4,7 @@ export default function Product({ product, handleClick, isInCart }) {
   return (
     <div
       className="product-container"
-      onClick={(e) => handleClick(e, product.id)}
+      onClick={isInCart ? null : (e) => handleClick(e, product.id)} //I added a conditional here to prevent showing detailed view when in cart
     >
       <p className="product-name">{product.name}</p>
       <img
