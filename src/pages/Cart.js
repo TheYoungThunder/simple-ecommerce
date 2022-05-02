@@ -23,9 +23,7 @@ function NoItems() {
     <>
       <div
         className="no-items modal modal-tour position-static d-block bg-secondary py-5"
-        tabindex="-1"
         role="dialog"
-        id="modalTour"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content rounded-6 shadow">
@@ -41,11 +39,7 @@ function NoItems() {
                   </div>
                 </li>
               </ul>
-              <Link
-                to="/"
-                className="btn btn-lg btn-primary mt-5 w-100"
-                data-bs-dismiss="modal"
-              >
+              <Link to="/" className="btn btn-lg btn-primary mt-5 w-100">
                 Go back
               </Link>
             </div>

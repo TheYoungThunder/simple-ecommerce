@@ -14,5 +14,5 @@ export default function ProductsList(props) {
       ></Product>
     );
   });
-  return <>{productsElements}</>;
+  return <div className="item-list">{productsElements}</div>;
 }

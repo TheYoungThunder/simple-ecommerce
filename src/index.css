@@ -28,11 +28,6 @@ li {
   width: 100px;
 }
 
-@media (min-width: 960px) {
-  body {
-    background-color: rebeccapurple;
-  }
-}
 
 .item-counter{
   position: absolute;
@@ -51,5 +46,22 @@ li {
 }
 
 .no-items{
-  min-height: calc("100vh-40px") !important;
+  height: calc(100vh - 40px - 32px) !important;
+}
+.item-list{
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.pagination{
+  position: fixed;
+  bottom: 2em; 
+  margin: 0 auto 0 auto;
+}
+
+@media (min-width: 960px) {
+  .item-list {
+    justify-content: flex-start;
+  }
 }

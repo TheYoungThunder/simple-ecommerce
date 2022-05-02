@@ -6,6 +6,7 @@ import db from "./db.json";
 import { nanoid } from "nanoid";
 import NavBar from "./components/NavBar";
 import DetailedProduct from "./components/DetailedProduct";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const dbWithId = db.products.map((product) => {
