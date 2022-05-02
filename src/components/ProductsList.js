@@ -4,7 +4,6 @@ import Product from "./Product";
 
 export default function ProductsList(props) {
   const products = props.currentItems; //Peeling off the products array
-  console.log(products);
   const productsElements = products.map((product) => {
     return (
       <Product

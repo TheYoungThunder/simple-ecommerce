@@ -1,6 +1,6 @@
 import Gallery from "./pages/Gallery";
 import Cart from "./pages/Cart";
-import { Route, Routes, Link, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import db from "./db.json";
 import { nanoid } from "nanoid";
@@ -23,13 +23,14 @@ function App() {
 
   // I combined all click handler functions into 1 here as you can see. I can also do the traditional method of assigning
   // different function, but this just simplified passing props through componenets
+  //I could have used useRed(), but I choose ClassName for simplicity
   function handleClick(e, key) {
     e.stopPropagation();
-    const className = e.target.className;
-    if (className === "featured-image-test") {
+    const kind = e.target.dataset.kind; //better to use this than classNames
+    if (kind === "featured-image-test") {
       console.log(key);
       console.log("this is an image"); //this if statement was for testing purposes only
-    } else if (className === "add-to-cart-button") {
+    } else if (kind === "add-to-cart-button") {
       console.log("this is a button");
       setCartList((prevCart) => {
         // add an instant of a product if the product doesnt exist in the cart already
@@ -46,7 +47,7 @@ function App() {
           return [...prevCart, { ...product, count: 1 }];
         }
       });
-    } else if (className === "remove-from-cart-button") {
+    } else if (kind === "remove-from-cart-button") {
       setCartList((prevCart) => {
         // decrement the item count, if count is zero remove the item instance
         return prevCart
@@ -54,16 +55,12 @@ function App() {
           .map((item) =>
             item.id === key ? { ...item, count: --item.count } : item
           );
-        // const removeButtonProducts = cartList.filter((product) => {
-        //   return product.id !== key;
-        // });
-        // return removeButtonProducts;
       });
       //the below else if references areas that when pressed should show a detailed product view
     } else if (
-      className === "product-container" ||
-      className === "featured-image" ||
-      className === "product-name"
+      kind === "product-container" ||
+      kind === "featured-image" ||
+      kind === "product-name"
     ) {
       navigate(`/products/${key}`);
     }
