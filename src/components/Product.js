@@ -20,14 +20,18 @@ export default function Product({ product, handleClick, isInCart }) {
         +{" "}
       </button>
       {isInCart && (
-        <button
-          className="remove-from-cart-button"
-          onClick={(e) => handleClick(e, product.id)}
-        >
-          {" "}
-          -{" "}
-        </button>
+        <>
+          <button
+            className="remove-from-cart-button"
+            onClick={(e) => handleClick(e, product.id)}
+          >
+            {" "}
+            -{" "}
+          </button>
+          <span>{product.count} items</span>
+        </>
       )}
+
       {/* <p className="product-description">{product.description}</p> */}
     </div>
   );

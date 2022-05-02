@@ -32,17 +32,32 @@ function App() {
     } else if (className === "add-to-cart-button") {
       console.log("this is a button");
       setCartList((prevCart) => {
-        const product = productList.find((product) => {
-          return product.id === key;
-        });
-        return [...prevCart, product];
+        // add an instant of a product if the product doesnt exist in the cart already
+        // otherwise just increment the item count
+        const productInCartAlready = prevCart.find((item) => item.id === key);
+        if (productInCartAlready) {
+          return prevCart.map((item) => {
+            return item.id === key ? { ...item, count: ++item.count } : item;
+          });
+        } else {
+          const product = productList.find((product) => {
+            return product.id === key;
+          });
+          return [...prevCart, { ...product, count: 1 }];
+        }
       });
     } else if (className === "remove-from-cart-button") {
       setCartList((prevCart) => {
-        const removeButtonProducts = cartList.filter((product) => {
-          return product.id !== key;
-        });
-        return removeButtonProducts;
+        // decrement the item count, if count is zero remove the item instance
+        return prevCart
+          .filter((item) => item.count > 1)
+          .map((item) =>
+            item.id === key ? { ...item, count: --item.count } : item
+          );
+        // const removeButtonProducts = cartList.filter((product) => {
+        //   return product.id !== key;
+        // });
+        // return removeButtonProducts;
       });
       //the below else if references areas that when pressed should show a detailed product view
     } else if (

@@ -8,7 +8,7 @@ import ProductsList from "../components/ProductsList";
 export default function Gallery(props) {
   //   console.log(props.productList);
   return (
-    <div>
+    <div className="gallery">
       <PaginatedItems
         productList={props.productList}
         handleClick={props.handleClick}
