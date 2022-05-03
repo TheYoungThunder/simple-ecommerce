@@ -9,7 +9,7 @@ export default function Gallery(props) {
       <PaginatedItems
         productList={props.productList}
         handleClick={props.handleClick}
-        itemsPerPage={2}
+        itemsPerPage={3}
       ></PaginatedItems>
       <Outlet></Outlet>
       {/* the OUTLET thing is added for detailed product view */}

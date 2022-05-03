@@ -7,9 +7,11 @@ export default function Product({ product, handleClick, isInCart }) {
       <div
         className="card"
         data-kind="product-container"
-        onClick={isInCart ? null : (e) => handleClick(e, product.id)}
-        data-bs-toggle={isInCart ? null : "modal"}
-        data-bs-target={isInCart ? null : "#exampleModal"}
+        onClick={(e) => {
+          return handleClick(e, product.id, isInCart);
+        }}
+        data-bs-toggle="modal"
+        data-bs-target="#detailsModal"
         style={{
           margin: "2em",
           width: "24rem",

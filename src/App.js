@@ -1,6 +1,6 @@
 import Gallery from "./pages/Gallery";
 import Cart from "./pages/Cart";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import db from "./db.json";
 import { nanoid } from "nanoid";
@@ -12,20 +12,37 @@ function App() {
   const dbWithId = db.products.map((product) => {
     return { ...product, id: nanoid() };
   });
+
+  const [show, setShow] = useState(false);
   const [productList, setProductList] = useState(dbWithId);
   const [cartList, setCartList] = useState([]);
   const [noOfCartItems, setNoOfCartItems] = useState(cartList.length);
+  const [focusedProductKey, setFocusedProductKey] = useState("");
 
-  const navigate = useNavigate(); // Newer hook introduced in react-router v6+ details here: https://www.kindacode.com/article/programmatically-navigate-using-react-router/
+  // const navigate = useNavigate(); // Newer hook introduced in react-router v6+ details here: https://www.kindacode.com/article/programmatically-navigate-using-react-router/
 
   useEffect(() => {
     setNoOfCartItems(cartList.length);
   }, [cartList]);
 
+  const handleClose = () => setShow(false); // These 2 are for the modals
+  const handleShow = () => setShow(true);
+
+  // useEffect(() => {
+  //   if (focusedProductKey) {
+  //     const detailedModal = document.getElementById("detailsModal");
+  //     console.log(detailedModal);
+  //     detailedModal.show();
+  //     detailedModal.addEventListener("show.bs.modal", () => {
+  //       setDetailedView(false);
+  //     });
+  //   }
+  // }, [focusedProductKey]);
+
   // I combined all click handler functions into 1 here as you can see. I can also do the traditional method of assigning
   // different function, but this just simplified passing props through componenets
   //I could have used useRed(), but I choose ClassName for simplicity
-  function handleClick(e, key) {
+  function handleClick(e, key, isInCart) {
     e.stopPropagation();
     const kind = e.target.dataset.kind; //better to use this than classNames
     if (kind === "featured-image-test") {
@@ -58,12 +75,12 @@ function App() {
           );
       });
       //the below else if references areas that when pressed should show a detailed product view
-    } else if (
-      kind === "product-container" ||
-      kind === "featured-image" ||
-      kind === "product-name"
-    ) {
-      navigate(`/products/${key}`);
+    } else if (kind === "featured-image") {
+      if (!isInCart) {
+        setShow(true);
+        console.log("product clicked");
+        setFocusedProductKey(key);
+      }
     }
   }
 
@@ -82,14 +99,7 @@ function App() {
               handleClick={handleClick}
             />
           }
-        >
-          <Route
-            path="/products/:productId"
-            element={
-              <DetailedProduct productList={productList}></DetailedProduct>
-            }
-          ></Route>
-        </Route>
+        ></Route>
         <Route
           path="cart"
           element={
@@ -111,6 +121,16 @@ function App() {
         />
         {/* the above route was added to deal with no matches */}
       </Routes>
+      {show && (
+        <DetailedProduct
+          productList={productList}
+          focusedProductKey={focusedProductKey}
+          show={show}
+          setShow={setShow}
+          handleShow={handleShow}
+          handleClose={handleClose}
+        ></DetailedProduct>
+      )}
     </div>
   );
 }
