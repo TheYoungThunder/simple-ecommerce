@@ -1,4 +1,4 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Carousel, Card } from "react-bootstrap";
 import React from "react";
 
 export default function DetailedProduct(props) {
@@ -16,7 +16,42 @@ export default function DetailedProduct(props) {
             <Modal.Title>{product.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <img
+            <Carousel>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={product.photos[0]}
+                  alt="First slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={product.photos[1]}
+                  alt="Second slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={product.photos[2]}
+                  alt="Third slide"
+                />
+              </Carousel.Item>
+            </Carousel>
+            <Card>
+              <Card.Body>
+                <Card.Title>{product.name}</Card.Title>
+                <Card.Text>{product.description}</Card.Text>
+              </Card.Body>
+              <Card.Body>
+                <p className="product-info">
+                  (${product.price}) (⭐{product.rate}) ({product.reviewsCount}{" "}
+                  reviews){" "}
+                </p>
+              </Card.Body>
+            </Card>
+            {/* <img
               src={product.featuredPhoto}
               alt="featured"
               className="featured-image"
@@ -25,7 +60,7 @@ export default function DetailedProduct(props) {
               (${product.price}) (⭐{product.rate}) ({product.reviewsCount}{" "}
               reviews){" "}
             </p>
-            <p className="product-description">{product.description}</p>
+            <p className="product-description">{product.description}</p> */}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={props.handleClose}>
